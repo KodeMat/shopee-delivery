@@ -1,0 +1,20 @@
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+.tomcat/
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
+
+# IntelliJ IDEA
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/shelf/
+.idea/dictionaries/
+out/
+web/WEB-INF/classes/
+
