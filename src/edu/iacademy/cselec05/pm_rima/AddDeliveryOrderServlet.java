@@ -1,4 +1,4 @@
-package edu.iacademy.cselec05.pm_rima.denise;
+package edu.iacademy.cselec05.pm_rima;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
