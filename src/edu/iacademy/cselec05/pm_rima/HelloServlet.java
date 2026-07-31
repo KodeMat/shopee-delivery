@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "HelloServlet", urlPatterns = {"/hello"})
 public class HelloServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,22 +29,22 @@ public class HelloServlet extends HttpServlet {
         
         try {
             out.println("<!DOCTYPE html>");
-            out.println("<html>");
+            out.println("<html lang='en'>");
             out.println("<head>");
             out.println("    <meta charset='UTF-8'>");
             out.println("    <meta name='viewport' content='width=device-width, initial-scale=1.0'>");
-            out.println("    <title>System Status - Antigravity Scaffolding</title>");
+            out.println("    <title>System Status - Shopee Delivery Logistics</title>");
             out.println("    <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap' rel='stylesheet'>");
             out.println("    <style>");
             out.println("        :root {");
             out.println("            --bg-color: #0b0f19;");
-            out.println("            --card-bg: rgba(255, 255, 255, 0.03);");
+            out.println("            --card-bg: rgba(255, 255, 255, 0.02);");
             out.println("            --card-border: rgba(255, 255, 255, 0.08);");
-            out.println("            --primary-glow: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);");
-            out.println("            --accent-glow: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);");
+            out.println("            --primary-glow: linear-gradient(135deg, #f97316 0%, #ea580c 100%);");
+            out.println("            --accent-glow: linear-gradient(135deg, #f97316 0%, #fdba74 100%);");
             out.println("            --text-primary: #f3f4f6;");
             out.println("            --text-secondary: #9ca3af;");
-            out.println("            --text-accent: #60a5fa;");
+            out.println("            --text-accent: #fb923c;");
             out.println("            --success-color: #10b981;");
             out.println("        }");
             out.println("        * {");
@@ -66,9 +67,9 @@ public class HelloServlet extends HttpServlet {
             out.println("        body::before {");
             out.println("            content: '';");
             out.println("            position: absolute;");
-            out.println("            width: 400px;");
-            out.println("            height: 400px;");
-            out.println("            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0,0,0,0) 70%);");
+            out.println("            width: 450px;");
+            out.println("            height: 450px;");
+            out.println("            background: radial-gradient(circle, rgba(249, 115, 22, 0.12) 0%, rgba(0,0,0,0) 70%);");
             out.println("            top: -100px;");
             out.println("            left: -100px;");
             out.println("            z-index: 0;");
@@ -78,7 +79,7 @@ public class HelloServlet extends HttpServlet {
             out.println("            position: absolute;");
             out.println("            width: 500px;");
             out.println("            height: 500px;");
-            out.println("            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(0,0,0,0) 70%);");
+            out.println("            background: radial-gradient(circle, rgba(234, 88, 12, 0.08) 0%, rgba(0,0,0,0) 70%);");
             out.println("            bottom: -150px;");
             out.println("            right: -100px;");
             out.println("            z-index: 0;");
@@ -96,7 +97,7 @@ public class HelloServlet extends HttpServlet {
             out.println("        .header h1 {");
             out.println("            font-size: 2.5rem;");
             out.println("            font-weight: 700;");
-            out.println("            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);");
+            out.println("            background: linear-gradient(135deg, #ffffff 40%, #fdba74 100%);");
             out.println("            -webkit-background-clip: text;");
             out.println("            -webkit-text-fill-color: transparent;");
             out.println("            letter-spacing: -0.025em;");
@@ -154,7 +155,7 @@ public class HelloServlet extends HttpServlet {
             out.println("        }");
             out.println("        .info-item:hover {");
             out.println("            transform: translateY(-2px);");
-            out.println("            border-color: rgba(255, 255, 255, 0.1);");
+            out.println("            border-color: rgba(249, 115, 22, 0.2);");
             out.println("            background: rgba(255, 255, 255, 0.03);");
             out.println("        }");
             out.println("        .info-label {");
@@ -176,13 +177,14 @@ public class HelloServlet extends HttpServlet {
             out.println("            display: block;");
             out.println("            text-align: center;");
             out.println("            margin-top: 24px;");
-            out.println("            color: var(--text-secondary);");
+            out.println("            color: var(--text-accent);");
             out.println("            text-decoration: none;");
             out.println("            font-size: 0.95rem;");
+            out.println("            font-weight: 600;");
             out.println("            transition: color 0.2s;");
             out.println("        }");
             out.println("        .back-btn:hover {");
-            out.println("            color: var(--text-primary);");
+            out.println("            color: #fdba74;");
             out.println("        }");
             out.println("        footer {");
             out.println("            margin-top: 40px;");
@@ -195,16 +197,16 @@ public class HelloServlet extends HttpServlet {
             out.println("<body>");
             out.println("    <div class='container'>");
             out.println("        <div class='header'>");
-            out.println("            <h1>Diagnostic Dashboard</h1>");
+            out.println("            <h1>Shopee Delivery Diagnostics</h1>");
             out.println("            <p>Servlet dynamically rendered environment context</p>");
             out.println("        </div>");
             out.println("        <div class='glass-card'>");
             out.println("            <div class='status-badge'>");
             out.println("                <div class='status-dot'></div>");
-            out.println("                <span>Servlet Context Active</span>");
+            out.println("                <span>Tomcat &amp; MySQL Engine Active</span>");
             out.println("            </div>");
-            out.println("            <h2 style='font-weight: 500; font-size: 1.35rem; margin-bottom: 10px;'>Environment Properties</h2>");
-            out.println("            <p style='color: var(--text-secondary); font-size: 0.95rem;'>Details gathered from the JVM and Web Container instance.</p>");
+            out.println("            <h2 style='font-weight: 600; font-size: 1.35rem; margin-bottom: 10px; color: var(--text-accent);'>System Runtime Properties</h2>");
+            out.println("            <p style='color: var(--text-secondary); font-size: 0.95rem;'>Live diagnostic metrics fetched directly from JVM and Web Container context.</p>");
             out.println("            <div class='grid'>");
             out.println("                <div class='info-item'>");
             out.println("                    <div class='info-label'>Java Version</div>");
@@ -223,7 +225,7 @@ public class HelloServlet extends HttpServlet {
             out.println("                    <div class='info-value' style='font-size: 0.9rem;'>" + jvmName + "</div>");
             out.println("                </div>");
             out.println("                <div class='info-item'>");
-            out.println("                    <div class='info-label'>Client Address</div>");
+            out.println("                    <div class='info-label'>Client IP Address</div>");
             out.println("                    <div class='info-value accent-text'>" + request.getRemoteAddr() + "</div>");
             out.println("                </div>");
             out.println("                <div class='info-item'>");
@@ -232,10 +234,10 @@ public class HelloServlet extends HttpServlet {
             out.println("                </div>");
             out.println("            </div>");
             out.println("        </div>");
-            out.println("        <a href='" + request.getContextPath() + "/' class='back-btn'>&larr; Back to Welcome Page</a>");
+            out.println("        <a href='" + request.getContextPath() + "/' class='back-btn'>&larr; Back to Logistics Dashboard</a>");
             out.println("    </div>");
             out.println("    <footer>");
-            out.println("        Scaffolded for edu.iacademy.cselec05.pm_rima &bull; IntelliJ IDEA Template");
+            out.println("        Shopee Delivery System v1.0 &bull; edu.iacademy.cselec05.pm_rima");
             out.println("    </footer>");
             out.println("</body>");
             out.println("</html>");
