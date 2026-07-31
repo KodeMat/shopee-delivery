@@ -21,136 +21,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Supervisor - Shopee Delivery System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Edit Supervisor - Shopee Delivery Logistics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary-glow: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-accent: #fb923c;
+            --error-bg: rgba(239, 68, 68, 0.1);
+            --error-border: rgba(239, 68, 68, 0.2);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow-x: hidden;
+            position: relative;
         }
-
+        body::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, rgba(0,0,0,0) 70%);
+            top: -150px;
+            left: -100px;
+            z-index: 0;
+            pointer-events: none;
+        }
         .form-wrapper {
             width: 100%;
-            max-width: 460px;
-            padding: 20px;
+            max-width: 480px;
+            padding: 24px;
+            position: relative;
+            z-index: 1;
         }
-
         .form-header {
             margin-bottom: 24px;
+            text-align: center;
         }
-
         .form-header h1 {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
-            color: #222;
-            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
         }
-
         .form-header p {
-            font-size: 13px;
-            color: #888;
+            font-size: 14px;
+            color: var(--text-secondary);
         }
-
         .form-card {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 28px 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-
         .alert-error {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-radius: 6px;
-            padding: 10px 14px;
+            background: var(--error-bg);
+            border: 1px solid var(--error-border);
+            border-radius: 8px;
+            padding: 12px 16px;
             font-size: 13px;
-            color: #b91c1c;
+            color: #fca5a5;
             margin-bottom: 20px;
         }
-
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 18px;
         }
-
         .form-label {
             display: block;
             font-size: 13px;
             font-weight: 500;
-            color: #555;
-            margin-bottom: 6px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
         }
-
         .form-input, .form-select {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px 16px;
             font-size: 14px;
-            font-family: inherit;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            color: #333;
-            background: #fff;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-primary);
             outline: none;
-            transition: border-color 0.15s;
+            transition: all 0.2s ease;
         }
-
         .form-input:focus, .form-select:focus {
-            border-color: #ee4d2d;
-            box-shadow: 0 0 0 2px rgba(238, 77, 45, 0.1);
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
         }
-
         .form-input[readonly] {
-            background: #f9f9f9;
-            color: #888;
+            background: rgba(0, 0, 0, 0.4);
+            color: var(--text-secondary);
         }
-
         .form-select option {
-            background: #fff;
+            background: #0b0f19;
+            color: #f3f4f6;
         }
-
         .form-actions {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 24px;
         }
-
         .btn-submit {
             flex: 1;
-            padding: 11px;
-            background: #ee4d2d;
+            padding: 12px;
+            background: var(--primary-glow);
             border: none;
-            border-radius: 6px;
-            color: #fff;
+            border-radius: 8px;
+            color: #ffffff;
             font-size: 14px;
             font-weight: 600;
-            font-family: inherit;
             cursor: pointer;
-            transition: background 0.15s;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
         }
-
-        .btn-submit:hover { background: #d63e1f; }
-
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+        }
         .btn-cancel {
-            padding: 11px 20px;
-            background: #fff;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            color: #555;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-secondary);
             font-size: 14px;
             font-weight: 500;
-            font-family: inherit;
             cursor: pointer;
             text-decoration: none;
             text-align: center;
+            transition: background 0.15s ease;
         }
-
-        .btn-cancel:hover { background: #f9f9f9; }
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
     </style>
 </head>
 <body>
@@ -188,8 +212,8 @@
                 <div class="form-group">
                     <label class="form-label" for="status">Status</label>
                     <select id="status" name="status" class="form-select">
-                        <option value="ACTIVE" <%= "ACTIVE".equals(editUser.getStatus()) ? "selected" : "" %>>Active</option>
-                        <option value="INACTIVE" <%= "INACTIVE".equals(editUser.getStatus()) ? "selected" : "" %>>Inactive</option>
+                        <option value="ACTIVE" <%= "ACTIVE".equalsIgnoreCase(editUser.getStatus()) ? "selected" : "" %>>Active</option>
+                        <option value="INACTIVE" <%= "INACTIVE".equalsIgnoreCase(editUser.getStatus()) ? "selected" : "" %>>Inactive</option>
                     </select>
                 </div>
 

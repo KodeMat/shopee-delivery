@@ -18,134 +18,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Supervisor - Shopee Delivery System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Register Supervisor - Shopee Delivery Logistics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary-glow: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-accent: #fb923c;
+            --error-bg: rgba(239, 68, 68, 0.1);
+            --error-border: rgba(239, 68, 68, 0.2);
+            --info-bg: rgba(59, 130, 246, 0.1);
+            --info-border: rgba(59, 130, 246, 0.2);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow-x: hidden;
+            position: relative;
         }
-
+        body::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, rgba(0,0,0,0) 70%);
+            top: -150px;
+            left: -100px;
+            z-index: 0;
+            pointer-events: none;
+        }
         .form-wrapper {
             width: 100%;
-            max-width: 460px;
-            padding: 20px;
+            max-width: 480px;
+            padding: 24px;
+            position: relative;
+            z-index: 1;
         }
-
         .form-header {
             margin-bottom: 24px;
+            text-align: center;
         }
-
         .form-header h1 {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
-            color: #222;
-            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
         }
-
         .form-header p {
-            font-size: 13px;
-            color: #888;
+            font-size: 14px;
+            color: var(--text-secondary);
         }
-
         .form-card {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 28px 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-
         .info-banner {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: 6px;
-            padding: 10px 14px;
+            background: var(--info-bg);
+            border: 1px solid var(--info-border);
+            border-radius: 8px;
+            padding: 12px 16px;
             font-size: 13px;
-            color: #1e40af;
+            color: #93c5fd;
             margin-bottom: 20px;
+            line-height: 1.5;
         }
-
         .alert-error {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-radius: 6px;
-            padding: 10px 14px;
+            background: var(--error-bg);
+            border: 1px solid var(--error-border);
+            border-radius: 8px;
+            padding: 12px 16px;
             font-size: 13px;
-            color: #b91c1c;
+            color: #fca5a5;
             margin-bottom: 20px;
         }
-
         .form-row {
             display: flex;
             gap: 12px;
         }
-
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 18px;
             flex: 1;
         }
-
         .form-label {
             display: block;
             font-size: 13px;
             font-weight: 500;
-            color: #555;
-            margin-bottom: 6px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
         }
-
         .form-input {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px 16px;
             font-size: 14px;
-            font-family: inherit;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            color: #333;
-            background: #fff;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-primary);
             outline: none;
-            transition: border-color 0.15s;
+            transition: all 0.2s ease;
         }
-
         .form-input:focus {
-            border-color: #ee4d2d;
-            box-shadow: 0 0 0 2px rgba(238, 77, 45, 0.1);
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
         }
-
         .btn-submit {
             width: 100%;
-            padding: 11px;
+            padding: 12px;
             margin-top: 8px;
-            background: #ee4d2d;
+            background: var(--primary-glow);
             border: none;
-            border-radius: 6px;
-            color: #fff;
+            border-radius: 8px;
+            color: #ffffff;
             font-size: 14px;
             font-weight: 600;
-            font-family: inherit;
             cursor: pointer;
-            transition: background 0.15s;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
         }
-
         .btn-submit:hover {
-            background: #d63e1f;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
         }
-
         .back-link {
             display: inline-block;
-            margin-top: 16px;
+            margin-top: 20px;
             font-size: 13px;
-            color: #ee4d2d;
+            color: var(--text-accent);
             text-decoration: none;
+            transition: color 0.15s ease;
         }
-
         .back-link:hover {
+            color: #f97316;
             text-decoration: underline;
         }
     </style>

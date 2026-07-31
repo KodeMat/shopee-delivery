@@ -16,5 +16,6 @@ devenv.local.yaml
 .idea/shelf/
 .idea/dictionaries/
 out/
-web/WEB-INF/classes/
-
+WebContent/WEB-INF/classes/
+*.war
+*.dat

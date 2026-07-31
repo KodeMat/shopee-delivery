@@ -18,6 +18,17 @@
     pkgs.tomcat9
   ];
 
+  # 3. Enable background MySQL server with shopee_delivery database
+  services.mysql = {
+    enable = true;
+    initialDatabases = [
+      {
+        name = "shopee_delivery";
+        schema = ./WebContent/WEB-INF/setup.sql;
+      }
+    ];
+  };
+
   # 3. Automate environment paths for Catalina
   env = {
     CATALINA_HOME = "${pkgs.tomcat9}";
@@ -29,17 +40,18 @@
   scripts.build.exec = ''
     # Compile Java files using native javac with Tomcat dependencies
     echo "Compiling Java sources..."
-    mkdir -p web/WEB-INF/classes
+    rm -rf WebContent/WEB-INF/classes/*
+    mkdir -p WebContent/WEB-INF/classes
     find src -name "*.java" > sources.txt
     if [ -s sources.txt ]; then
-      javac -cp "$CATALINA_HOME/lib/servlet-api.jar:$CATALINA_HOME/lib/jsp-api.jar" -d web/WEB-INF/classes @sources.txt
+      javac -cp "$CATALINA_HOME/lib/servlet-api.jar:$CATALINA_HOME/lib/jsp-api.jar:WebContent/WEB-INF/lib/mysql-connector-j.jar" -d WebContent/WEB-INF/classes @sources.txt
     fi
     rm -f sources.txt
 
     # Stage web application layout
     echo "Staging application..."
     mkdir -p out/staging
-    cp -rf web/* out/staging/
+    cp -rf WebContent/* out/staging/
     rm -f out/staging/WEB-INF/lib/servlet-api.jar out/staging/WEB-INF/lib/jsp-api.jar
 
     # Package as WAR using JDK jar command

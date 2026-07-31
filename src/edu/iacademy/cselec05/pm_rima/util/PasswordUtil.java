@@ -38,4 +38,8 @@ public class PasswordUtil {
         String computedHash = hashPassword(rawPassword);
         return computedHash.equals(storedHash);
     }
+
+    public static boolean checkPassword(String rawPassword, String storedHash) {
+        return verifyPassword(rawPassword, storedHash);
+    }
 }
