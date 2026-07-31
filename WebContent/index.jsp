@@ -319,6 +319,8 @@
                 <a href="index.jsp" class="active">Dashboard</a>
                 <% if (isSupervisor) { %>
                     <a href="driver.jsp">Drivers</a>
+                    <a href="vehicle.jsp">Vehicles</a>
+                    <a href="orders.jsp">Orders</a>
                 <% } %>
             </div>
             <span class="role-tag <%= isAdmin ? "admin" : "supervisor" %>"><%= role %></span>
@@ -400,12 +402,12 @@
                 <div class="module-card">
                     <h3>Fleet Vehicles</h3>
                     <p>Track delivery motorcycles, vans, trucks, load capacities, and maintenance schedules.</p>
-                    <button class="btn-primary" style="opacity: 0.6; cursor: not-allowed;">Coming Soon</button>
+                    <a href="vehicle.jsp" class="btn-primary">Manage Vehicles &rarr;</a>
                 </div>
                 <div class="module-card">
                     <h3>Delivery Orders</h3>
                     <p>Create shipments, assign drivers & vehicles, and update real-time delivery tracking status.</p>
-                    <button class="btn-primary" style="opacity: 0.6; cursor: not-allowed;">Coming Soon</button>
+                    <a href="orders.jsp" class="btn-primary">Manage Orders &rarr;</a>
                 </div>
             </div>
         <% } %>

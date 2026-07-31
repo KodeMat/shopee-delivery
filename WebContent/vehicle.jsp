@@ -1,10 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="edu.iacademy.cselec05.pm_rima.DatabaseConfig" %>
+<%@ page import="edu.iacademy.cselec05.pm_rima.util.DatabaseConfig" %>
 <%
     HttpSession sess = request.getSession(false);
-    if (sess == null || sess.getAttribute("role") == null) {
-        response.sendRedirect("login.jsp");
+    if (sess == null || sess.getAttribute("user") == null) {
+        response.sendRedirect(request.getContextPath() + "/login");
+        return;
+    }
+    String role = (String) sess.getAttribute("role");
+    if (!"SUPERVISOR".equalsIgnoreCase(role)) {
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
         return;
     }
     String username = (String) sess.getAttribute("username");
@@ -149,12 +154,12 @@
             border: 1px solid rgba(16, 185, 129, 0.2);
             color: var(--success-color);
         }
-        .badge-maintenance {
+        .badge-inuse {
             background: rgba(245, 158, 11, 0.1);
             border: 1px solid rgba(245, 158, 11, 0.2);
             color: var(--warning-color);
         }
-        .badge-unavailable {
+        .badge-maintenance {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.2);
             color: var(--danger-color);
@@ -259,10 +264,10 @@
     <div class="navbar">
         <h2>Vehicle Management</h2>
         <div class="nav-links">
-            <a href="supervisor_dashboard.jsp">Dashboard</a>
+            <a href="index.jsp">Dashboard</a>
             <a href="driver.jsp">Drivers</a>
             <a href="vehicle.jsp" class="active">Vehicles</a>
-            <a href="orders.jsp">Orders</a>
+            <a href="logout">Logout</a>
         </div>
     </div>
 

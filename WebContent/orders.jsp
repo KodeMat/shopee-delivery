@@ -1,10 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="edu.iacademy.cselec05.pm_rima.DatabaseConfig" %>
+<%@ page import="edu.iacademy.cselec05.pm_rima.util.DatabaseConfig" %>
 <%
     HttpSession sess = request.getSession(false);
-    if (sess == null || sess.getAttribute("role") == null) {
-        response.sendRedirect("login.jsp");
+    if (sess == null || sess.getAttribute("user") == null) {
+        response.sendRedirect(request.getContextPath() + "/login");
+        return;
+    }
+    String role = (String) sess.getAttribute("role");
+    if (!"SUPERVISOR".equalsIgnoreCase(role)) {
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
         return;
     }
     String username = (String) sess.getAttribute("username");
@@ -27,8 +32,8 @@
             --text-accent: #fb923c;
             --success-color: #10b981;
             --warning-color: #f59e0b;
-            --info-color: #3b82f6;
             --danger-color: #ef4444;
+            --info-color: #3b82f6;
         }
         * {
             box-sizing: border-box;
@@ -85,14 +90,14 @@
         }
         .container {
             max-width: 1200px;
-            width: 95%;
+            width: 90%;
             margin: 40px auto;
             z-index: 10;
             display: grid;
-            grid-template-columns: 2.2fr 1fr;
+            grid-template-columns: 2fr 1fr;
             gap: 30px;
         }
-        @media (max-width: 1000px) {
+        @media (max-width: 900px) {
             .container {
                 grid-template-columns: 1fr;
             }
@@ -105,7 +110,6 @@
             border-radius: 24px;
             padding: 32px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            margin-bottom: 24px;
         }
         .card-title {
             font-size: 1.25rem;
@@ -127,7 +131,6 @@
         th, td {
             padding: 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            vertical-align: top;
         }
         th {
             color: var(--text-secondary);
@@ -157,10 +160,10 @@
             border: 1px solid rgba(59, 130, 246, 0.2);
             color: var(--info-color);
         }
-        .badge-transit {
-            background: rgba(249, 115, 22, 0.1);
-            border: 1px solid rgba(249, 115, 22, 0.2);
-            color: var(--text-accent);
+        .badge-intransit {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            color: #c084fc;
         }
         .badge-delivered {
             background: rgba(16, 185, 129, 0.1);
@@ -171,12 +174,6 @@
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.2);
             color: var(--danger-color);
-        }
-        .assign-container, .status-container {
-            margin-top: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
         }
         .form-group {
             margin-bottom: 20px;
@@ -190,7 +187,7 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
-        .form-input, select {
+        .form-input, select, textarea {
             width: 100%;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -201,7 +198,7 @@
             outline: none;
             transition: all 0.3s;
         }
-        .form-input:focus, select:focus {
+        .form-input:focus, select:focus, textarea:focus {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(249, 115, 22, 0.5);
             box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
@@ -209,22 +206,6 @@
         select option {
             background-color: var(--bg-color);
             color: var(--text-primary);
-        }
-        .btn-inline {
-            background: var(--primary-glow);
-            border: none;
-            border-radius: 8px;
-            padding: 8px 12px;
-            color: white;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        .btn-inline:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
         }
         .btn-submit {
             display: block;
@@ -238,10 +219,27 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            margin-bottom: 12px;
         }
         .btn-submit:hover {
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3);
+        }
+        .btn-clear {
+            display: block;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-clear:hover {
+            background: rgba(255, 255, 255, 0.06);
         }
         .alert {
             border-radius: 12px;
@@ -260,7 +258,12 @@
             border: 1px solid rgba(16, 185, 129, 0.2);
             color: #34d399;
         }
-        .small-select {
+        .inline-form {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .inline-form select {
             padding: 6px 10px;
             font-size: 0.85rem;
             border-radius: 8px;
@@ -271,10 +274,11 @@
     <div class="navbar">
         <h2>Delivery Orders</h2>
         <div class="nav-links">
-            <a href="supervisor_dashboard.jsp">Dashboard</a>
+            <a href="index.jsp">Dashboard</a>
             <a href="driver.jsp">Drivers</a>
             <a href="vehicle.jsp">Vehicles</a>
             <a href="orders.jsp" class="active">Orders</a>
+            <a href="logout">Logout</a>
         </div>
     </div>
 
