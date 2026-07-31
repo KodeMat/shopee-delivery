@@ -1,10 +1,16 @@
-{ pkgs, lib, config, inputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 
 {
   # 1. Force Java 1.8 (Java 8) as the environment runtime
   languages.java = {
     enable = true;
-    jdk.package = pkgs.openjdk8; 
+    jdk.package = pkgs.openjdk8;
   };
 
   # 2. Pull Apache Tomcat 9 into the environment packages
@@ -12,7 +18,7 @@
     pkgs.tomcat9
   ];
 
-  # 3. Automate environment paths for Catalina 
+  # 3. Automate environment paths for Catalina
   env = {
     CATALINA_HOME = "${pkgs.tomcat9}";
     # Sets up a local writable workspace inside your project folder
@@ -59,9 +65,8 @@
 
     # Compile and deploy using the registered build script
     build
-    
+
     # Run Tomcat in the foreground inside this process manager
     exec $CATALINA_HOME/bin/catalina.sh run
   '';
 }
-
