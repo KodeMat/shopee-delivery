@@ -1,11 +1,13 @@
-# Shopee Delivery build script for Windows
+# Shopee Delivery build script for Windows / XAMPP
 
-Write-Host "Compiling Java sources..." -ForegroundColor Cyan
+Write-Host "Compiling Java sources recursively..." -ForegroundColor Cyan
 if (!(Test-Path "WebContent/WEB-INF/classes")) {
     New-Item -ItemType Directory -Force -Path "WebContent/WEB-INF/classes" | Out-Null
 }
 
-javac -source 1.8 -target 1.8 -cp "WebContent/WEB-INF/lib/servlet-api.jar;WebContent/WEB-INF/lib/jsp-api.jar;WebContent/WEB-INF/lib/mysql-connector-j.jar" -d WebContent/WEB-INF/classes src/edu/iacademy/cselec05/pm_rima/*.java
+$javaFiles = Get-ChildItem -Recurse -Path "src" -Filter "*.java" | ForEach-Object { $_.FullName }
+
+javac -source 1.8 -target 1.8 -cp "WebContent/WEB-INF/lib/servlet-api.jar;WebContent/WEB-INF/lib/jsp-api.jar;WebContent/WEB-INF/lib/mysql-connector-j.jar" -d WebContent/WEB-INF/classes $javaFiles
 
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Java compilation failed!"
