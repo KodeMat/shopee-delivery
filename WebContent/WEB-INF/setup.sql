@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS delivery_orders (
     order_number VARCHAR(50) NOT NULL UNIQUE,
     recipient_name VARCHAR(100) NOT NULL,
     recipient_address TEXT NOT NULL,
+    contact_phone VARCHAR(20),
     weight DOUBLE,
     status VARCHAR(20) DEFAULT 'Pending',
     driver_id INT NULL,

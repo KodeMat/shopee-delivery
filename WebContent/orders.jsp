@@ -365,11 +365,9 @@
                                                 <span style="color: var(--text-secondary); font-size: 0.85rem; font-style: italic;">Unassigned</span>
                                             <% } %>
                                         </td>
-                                        <td>
-                                            <!-- Change status form -->
-                                            <form action="OrderServlet" method="post" class="status-container">
-                                                <input type="hidden" name="action" value="setStatus">
-                                                <input type="hidden" name="orderId" value="<%= orderId %>">
+                                                                                    <!-- Change status form (Denise's SetOrderStatusServlet) -->
+                                            <form action="set-status" method="post" class="status-container">
+                                                <input type="hidden" name="orderId" value="<%= orderNum %>">
                                                 <select name="status" class="small-select">
                                                     <option value="Pending" <%= "Pending".equals(stat) ? "selected" : "" %>>Pending</option>
                                                     <option value="Assigned" <%= "Assigned".equals(stat) ? "selected" : "" %>>Assigned</option>
@@ -449,20 +447,18 @@
             </div>
         </div>
 
-        <!-- Book Order panel -->
+        <!-- Book Order panel (Denise's AddDeliveryOrderServlet) -->
         <div class="glass-card">
             <h2 class="card-title">Book Delivery Order</h2>
-            <form action="OrderServlet" method="post">
-                <input type="hidden" name="action" value="add">
-
-                <div class="form-group">
-                    <label for="orderNumber">Tracking/Order Number</label>
-                    <input type="text" id="orderNumber" name="orderNumber" class="form-input" placeholder="e.g. SPX-98218-PH" required autocomplete="off">
-                </div>
-
+            <form action="add-order" method="post">
                 <div class="form-group">
                     <label for="recipientName">Recipient Name</label>
                     <input type="text" id="recipientName" name="recipientName" class="form-input" placeholder="e.g. Jane Smith" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="recipientPhone">Contact Phone</label>
+                    <input type="text" id="recipientPhone" name="recipientPhone" class="form-input" placeholder="e.g. +63 917 123 4567" required autocomplete="off">
                 </div>
 
                 <div class="form-group">
