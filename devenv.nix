@@ -7,9 +7,10 @@
     jdk.package = pkgs.openjdk8; 
   };
 
-  # 2. Pull Apache Tomcat 9 into the environment packages
+  # 2. Pull Apache Tomcat 9 and MySQL Connector/J into the environment packages
   packages = [
     pkgs.tomcat9
+    pkgs.mysql-connector-j
   ];
 
   # 3. Automate environment paths for Catalina 
@@ -21,19 +22,23 @@
 
   # 4. Custom build, package, and deploy script
   scripts.build.exec = ''
+    echo "Staging mysql-connector-j jar..."
+    mkdir -p WebContent/WEB-INF/lib
+    cp -f "${pkgs.mysql-connector-j}/share/java/mysql-connector-j.jar" WebContent/WEB-INF/lib/
+
     # Compile Java files using native javac with Tomcat dependencies
     echo "Compiling Java sources..."
-    mkdir -p web/WEB-INF/classes
+    mkdir -p WebContent/WEB-INF/classes
     find src -name "*.java" > sources.txt
     if [ -s sources.txt ]; then
-      javac -cp "$CATALINA_HOME/lib/servlet-api.jar:$CATALINA_HOME/lib/jsp-api.jar" -d web/WEB-INF/classes @sources.txt
+      javac -cp "$CATALINA_HOME/lib/servlet-api.jar:$CATALINA_HOME/lib/jsp-api.jar:WebContent/WEB-INF/lib/mysql-connector-j.jar" -d WebContent/WEB-INF/classes @sources.txt
     fi
     rm -f sources.txt
 
     # Stage web application layout
     echo "Staging application..."
     mkdir -p out/staging
-    cp -rf web/* out/staging/
+    cp -rf WebContent/* out/staging/
     rm -f out/staging/WEB-INF/lib/servlet-api.jar out/staging/WEB-INF/lib/jsp-api.jar
 
     # Package as WAR using JDK jar command
@@ -64,4 +69,5 @@
     exec $CATALINA_HOME/bin/catalina.sh run
   '';
 }
+
 

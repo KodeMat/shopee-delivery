@@ -170,6 +170,22 @@
         <div class="glass-card">
             <h2 class="section-title">Available Routes</h2>
             
+            <a href="login.jsp" class="route-item">
+                <div class="route-info">
+                    <span class="route-path">Logistics Portal / Login</span>
+                    <span class="route-desc">Access the parcel delivery system as Admin or Supervisor.</span>
+                </div>
+                <span class="badge badge-servlet">System Login</span>
+            </a>
+
+            <a href="signup.jsp" class="route-item">
+                <div class="route-info">
+                    <span class="route-path">Request Access / Sign Up</span>
+                    <span class="route-desc">Submit a supervisor registration request.</span>
+                </div>
+                <span class="badge badge-jsp">Registration</span>
+            </a>
+            
             <a href="hello" class="route-item">
                 <div class="route-info">
                     <span class="route-path">/hello</span>
@@ -177,14 +193,6 @@
                 </div>
                 <span class="badge badge-servlet">Servlet</span>
             </a>
-            
-            <div class="route-item" style="cursor: default;">
-                <div class="route-info">
-                    <span class="route-path">/index.jsp</span>
-                    <span class="route-desc">This landing page dynamically processed by the JSP engine.</span>
-                </div>
-                <span class="badge badge-jsp">JSP</span>
-            </div>
         </div>
         
         <p class="footer-note">

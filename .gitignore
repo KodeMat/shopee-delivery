@@ -11,10 +11,9 @@ devenv.local.yaml
 .pre-commit-config.yaml
 
 # IntelliJ IDEA
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/shelf/
-.idea/dictionaries/
+.idea/
 out/
 web/WEB-INF/classes/
 
+# vscode
+.vscode/
