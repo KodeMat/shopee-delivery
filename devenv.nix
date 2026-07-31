@@ -1,19 +1,35 @@
-{ pkgs, lib, config, inputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 
 {
   # 1. Force Java 1.8 (Java 8) as the environment runtime
   languages.java = {
     enable = true;
-    jdk.package = pkgs.openjdk8; 
+    jdk.package = pkgs.openjdk8;
   };
 
-  # 2. Pull Apache Tomcat 9 and MySQL Connector/J into the environment packages
+  # 2. Pull Apache Tomcat 9 into the environment packages
   packages = [
     pkgs.tomcat9
-    pkgs.mysql-connector-j
   ];
 
-  # 3. Automate environment paths for Catalina 
+  # 3. Enable background MySQL server with shopee_delivery database
+  services.mysql = {
+    enable = true;
+    initialDatabases = [
+      {
+        name = "shopee_delivery";
+        schema = ./WebContent/WEB-INF/setup.sql;
+      }
+    ];
+  };
+
+  # 3. Automate environment paths for Catalina
   env = {
     CATALINA_HOME = "${pkgs.tomcat9}";
     # Sets up a local writable workspace inside your project folder
@@ -22,12 +38,9 @@
 
   # 4. Custom build, package, and deploy script
   scripts.build.exec = ''
-    echo "Staging mysql-connector-j jar..."
-    mkdir -p WebContent/WEB-INF/lib
-    cp -f "${pkgs.mysql-connector-j}/share/java/mysql-connector-j.jar" WebContent/WEB-INF/lib/
-
     # Compile Java files using native javac with Tomcat dependencies
     echo "Compiling Java sources..."
+    rm -rf WebContent/WEB-INF/classes/*
     mkdir -p WebContent/WEB-INF/classes
     find src -name "*.java" > sources.txt
     if [ -s sources.txt ]; then
@@ -64,10 +77,8 @@
 
     # Compile and deploy using the registered build script
     build
-    
+
     # Run Tomcat in the foreground inside this process manager
     exec $CATALINA_HOME/bin/catalina.sh run
   '';
 }
-
-

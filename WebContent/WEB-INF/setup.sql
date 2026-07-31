@@ -3,9 +3,12 @@
 CREATE TABLE IF NOT EXISTS users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NULL UNIQUE,
     role VARCHAR(20) NOT NULL,
-    status VARCHAR(20) NOT NULL
+    status VARCHAR(20) DEFAULT 'ACTIVE',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS vehicles (
@@ -39,7 +42,7 @@ CREATE TABLE IF NOT EXISTS delivery_orders (
     FOREIGN KEY (vehicle_id) REFERENCES vehicles(vehicle_id) ON DELETE SET NULL
 );
 
--- Insert hardcoded admin user
-INSERT INTO users (username, password, role, status)
-VALUES ('admin', 'admin123', 'ADMIN', 'APPROVED')
+-- Insert hardcoded admin user (BCrypt hashed 'admin123')
+INSERT INTO users (username, password_hash, full_name, email, role, status)
+VALUES ('admin', '$2a$10$7R0wU/vPvhD7l1V2wK2zxe9M0Gg/eJtT0n/xXm5c1Y8s4G755wBf2', 'System Administrator', 'admin@shopee.ph', 'ADMIN', 'ACTIVE')
 ON DUPLICATE KEY UPDATE username=username;

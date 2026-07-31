@@ -1,10 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="edu.iacademy.cselec05.pm_rima.DatabaseConfig" %>
+<%@ page import="edu.iacademy.cselec05.pm_rima.util.DatabaseConfig" %>
 <%
     HttpSession sess = request.getSession(false);
-    if (sess == null || sess.getAttribute("role") == null) {
-        response.sendRedirect("login.jsp");
+    if (sess == null || sess.getAttribute("user") == null) {
+        response.sendRedirect(request.getContextPath() + "/login");
+        return;
+    }
+    String role = (String) sess.getAttribute("role");
+    if (!"SUPERVISOR".equalsIgnoreCase(role)) {
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
         return;
     }
     String username = (String) sess.getAttribute("username");
@@ -253,10 +258,9 @@
     <div class="navbar">
         <h2>Driver Management</h2>
         <div class="nav-links">
-            <a href="supervisor_dashboard.jsp">Dashboard</a>
+            <a href="index.jsp">Dashboard</a>
             <a href="driver.jsp" class="active">Drivers</a>
-            <a href="vehicle.jsp">Vehicles</a>
-            <a href="orders.jsp">Orders</a>
+            <a href="logout">Logout</a>
         </div>
     </div>
 
