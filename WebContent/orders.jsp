@@ -21,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery Orders - Shopee Delivery Logistics</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/common.css?v=2">
     <style>
         body {
             display: flex;
@@ -37,46 +37,6 @@
             left: -100px;
             z-index: 0;
         }
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .role-tag {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .role-tag.admin {
-            background: rgba(239, 68, 68, 0.1);
-            color: #fca5a5;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-        .role-tag.supervisor {
-            background: rgba(59, 130, 246, 0.1);
-            color: #93c5fd;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-        .btn-logout {
-            padding: 8px 16px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.15s ease;
-        }
-        .btn-logout:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-primary);
-        }
         .inline-form {
             display: flex;
             gap: 8px;
@@ -86,6 +46,70 @@
             padding: 6px 10px;
             font-size: 0.85rem;
             border-radius: 8px;
+        }
+
+        /* ===== Modal Dialog ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-card {
+            background: #111827;
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 32px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.25s ease;
+        }
+        .modal-overlay.active .modal-card {
+            transform: translateY(0);
+        }
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-accent);
+            margin-bottom: 20px;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+        .btn-secondary {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
         }
     </style>
 </head>
@@ -201,50 +225,12 @@
                                                 <button type="submit" class="btn-inline">Set Status</button>
                                             </form>
 
-                                            <!-- Assign Driver/Vehicle form -->
-                                            <form action="OrderServlet" method="post" class="assign-container">
-                                                <input type="hidden" name="action" value="assign">
-                                                <input type="hidden" name="orderId" value="<%= orderId %>">
-                                                
-                                                <select name="driverId" class="small-select">
-                                                    <option value="">-- Choose Driver --</option>
-                                                    <%
-                                                        // Fetch available drivers
-                                                        try (PreparedStatement psDrv = conn.prepareStatement("SELECT * FROM drivers WHERE status = 'Available'");
-                                                             ResultSet rsDrv = psDrv.executeQuery()) {
-                                                            while (rsDrv.next()) {
-                                                                int drvId = rsDrv.getInt("driver_id");
-                                                                String drvName = rsDrv.getString("name");
-                                                                boolean isSel = drvId == rs.getInt("driver_id");
-                                                    %>
-                                                                <option value="<%= drvId %>" <%= isSel ? "selected" : "" %>><%= drvName %></option>
-                                                    <%
-                                                            }
-                                                        }
-                                                    %>
-                                                </select>
-
-                                                <select name="vehicleId" class="small-select">
-                                                    <option value="">-- Choose Vehicle --</option>
-                                                    <%
-                                                        // Fetch available vehicles
-                                                        try (PreparedStatement psVeh = conn.prepareStatement("SELECT * FROM vehicles WHERE status = 'Available'");
-                                                             ResultSet rsVeh = psVeh.executeQuery()) {
-                                                            while (rsVeh.next()) {
-                                                                int vehId = rsVeh.getInt("vehicle_id");
-                                                                String vehPlate = rsVeh.getString("plate_number");
-                                                                String vehType = rsVeh.getString("vehicle_type");
-                                                                boolean isSel = vehId == rs.getInt("vehicle_id");
-                                                    %>
-                                                                <option value="<%= vehId %>" <%= isSel ? "selected" : "" %>><%= vehPlate %> (<%= vehType %>)</option>
-                                                    <%
-                                                            }
-                                                        }
-                                                    %>
-                                                </select>
-
-                                                <button type="submit" class="btn-inline">Assign Fleet</button>
-                                            </form>
+                                            <!-- Fleet Assignment Trigger Button (Opens Modal Popup) -->
+                                            <div style="margin-top: 8px;">
+                                                <button type="button" class="btn-inline" style="background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.3); color: #fb923c;" onclick="openAssignModal(<%= orderId %>, '#<%= orderNum %>')">
+                                                    🚚 Assign Fleet
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                         <%
@@ -298,5 +284,72 @@
             </form>
         </div>
     </div>
+
+    <!-- Glassmorphism Modal Dialog for Fleet Assignment -->
+    <div id="assignModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 class="modal-title" id="modalTitle">Assign Fleet & Dispatch</h3>
+            <form action="OrderServlet" method="post">
+                <input type="hidden" name="action" value="assign">
+                <input type="hidden" id="modalOrderId" name="orderId" value="">
+
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label for="modalDriverSelect">Select Available Driver</label>
+                    <select id="modalDriverSelect" name="driverId" class="form-input">
+                        <option value="">-- Choose Driver --</option>
+                        <%
+                            try (Connection connModal = DatabaseConfig.getConnection();
+                                 PreparedStatement psDrv = connModal.prepareStatement("SELECT * FROM drivers WHERE status = 'Available'");
+                                 ResultSet rsDrv = psDrv.executeQuery()) {
+                                while (rsDrv.next()) {
+                        %>
+                                    <option value="<%= rsDrv.getInt("driver_id") %>"><%= rsDrv.getString("name") %></option>
+                        <%
+                                }
+                            } catch (Exception ignored) {}
+                        %>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="modalVehicleSelect">Select Available Vehicle</label>
+                    <select id="modalVehicleSelect" name="vehicleId" class="form-input">
+                        <option value="">-- Choose Vehicle --</option>
+                        <%
+                            try (Connection connModal = DatabaseConfig.getConnection();
+                                 PreparedStatement psVeh = connModal.prepareStatement("SELECT * FROM vehicles WHERE status = 'Available'");
+                                 ResultSet rsVeh = psVeh.executeQuery()) {
+                                while (rsVeh.next()) {
+                        %>
+                                    <option value="<%= rsVeh.getInt("vehicle_id") %>"><%= rsVeh.getString("plate_number") %> (<%= rsVeh.getString("vehicle_type") %>)</option>
+                        <%
+                                }
+                            } catch (Exception ignored) {}
+                        %>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeAssignModal()">Cancel</button>
+                    <button type="submit" class="btn-submit" style="width: auto; margin-top: 0; padding: 10px 20px;">Confirm Assignment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openAssignModal(orderId, orderNum) {
+            document.getElementById('modalOrderId').value = orderId;
+            document.getElementById('modalTitle').innerText = 'Assign Fleet to ' + orderNum;
+            document.getElementById('assignModal').classList.add('active');
+        }
+        function closeAssignModal() {
+            document.getElementById('assignModal').classList.remove('active');
+        }
+        // Close modal when clicking outside the card
+        document.getElementById('assignModal').addEventListener('click', function(e) {
+            if (e.target === this) closeAssignModal();
+        });
+    </script>
 </body>
 </html>
