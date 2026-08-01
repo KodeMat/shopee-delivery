@@ -20,35 +20,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Supervisor - Shopee Delivery Logistics</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
     <style>
         :root {
-            --bg-color: #0b0f19;
             --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --primary-glow: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --text-accent: #fb923c;
-            --error-bg: rgba(239, 68, 68, 0.1);
-            --error-border: rgba(239, 68, 68, 0.2);
             --info-bg: rgba(59, 130, 246, 0.1);
             --info-border: rgba(59, 130, 246, 0.2);
         }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
-            position: relative;
         }
         body::before {
             content: '';

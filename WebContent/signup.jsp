@@ -6,33 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Shopee Delivery Logistics</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
     <style>
         :root {
-            --bg-color: #0b0f19;
             --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --primary-glow: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --text-accent: #fb923c;
-            --error-bg: rgba(239, 68, 68, 0.1);
-            --error-border: rgba(239, 68, 68, 0.2);
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
-            position: relative;
         }
         body::before {
             content: '';
@@ -49,6 +31,7 @@
             max-width: 450px;
             padding: 24px;
             z-index: 10;
+            display: block;
         }
         .logo-container {
             text-align: center;
@@ -83,67 +66,24 @@
             margin-top: 6px;
         }
         .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 32px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         .form-group {
             margin-bottom: 20px;
         }
         .form-group label {
-            display: block;
             font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
         }
         .form-input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
             padding: 12px 16px;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.3s;
-        }
-        .form-input:focus {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(249, 115, 22, 0.5);
-            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
         }
         .btn-submit {
-            display: block;
-            width: 100%;
-            background: var(--primary-glow);
-            border: none;
-            border-radius: 12px;
             padding: 14px;
-            color: white;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
             box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
             margin-top: 24px;
         }
         .btn-submit:hover {
-            transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3);
-        }
-        .alert {
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            text-align: center;
         }
         .alert-error {
             background-color: var(--error-bg);

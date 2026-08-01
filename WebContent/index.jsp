@@ -35,34 +35,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Shopee Delivery Logistics</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
     <style>
         :root {
-            --bg-color: #0b0f19;
             --card-bg: rgba(255, 255, 255, 0.025);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --primary-glow: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --text-accent: #fb923c;
-            --success-color: #10b981;
-            --danger-color: #ef4444;
-            --success-bg: rgba(16, 185, 129, 0.1);
-            --success-border: rgba(16, 185, 129, 0.2);
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
-            position: relative;
         }
         body::before {
             content: '';
@@ -75,38 +55,10 @@
             z-index: 0;
             pointer-events: none;
         }
-        .navbar {
-            background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--card-border);
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-        }
-        .navbar h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 40%, #fdba74 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
         .nav-right {
             display: flex;
             align-items: center;
             gap: 16px;
-        }
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            margin-left: 20px;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--text-accent);
         }
         .role-tag {
             display: inline-block;
@@ -175,12 +127,6 @@
             margin-bottom: 24px;
         }
         .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 32px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             margin-bottom: 32px;
         }
         .card-header {
@@ -188,13 +134,6 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 24px;
-        }
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
         .btn-primary {
             display: inline-block;
@@ -215,26 +154,7 @@
             box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
         }
         .table-container {
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-        th, td {
-            padding: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        th {
-            color: var(--text-secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-        }
-        td {
-            font-size: 0.95rem;
+            margin-top: 0;
         }
         .edit-link {
             color: var(--text-accent);

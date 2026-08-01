@@ -48,32 +48,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supervisor Dashboard - Shopee Delivery Logistics</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --primary-glow: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --text-accent: #fb923c;
             --info-glow: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             --success-glow: linear-gradient(135deg, #10b981 0%, #059669 100%);
         }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
-            position: relative;
         }
         body::before {
             content: '';
@@ -84,23 +67,6 @@
             top: -150px;
             left: calc(50% - 300px);
             z-index: 0;
-        }
-        .navbar {
-            background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--card-border);
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-        }
-        .navbar h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 40%, #fdba74 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         .nav-info {
             display: flex;

@@ -16,33 +16,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Shopee Delivery Logistics</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-border: rgba(255, 255, 255, 0.08);
             --primary-glow: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             --accent-glow: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
             --text-accent: #60a5fa;
-            --success-color: #10b981;
-            --danger-color: #ef4444;
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
-            position: relative;
         }
         body::before {
             content: '';
@@ -54,19 +37,7 @@
             left: -100px;
             z-index: 0;
         }
-        .navbar {
-            background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--card-border);
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-        }
         .navbar h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
             background: linear-gradient(135deg, #ffffff 40%, #93c5fd 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -89,60 +60,6 @@
         }
         .btn-logout:hover {
             opacity: 0.8;
-        }
-        .container {
-            max-width: 1200px;
-            width: 90%;
-            margin: 40px auto;
-            z-index: 10;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-        }
-        @media (max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 32px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: var(--text-accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .table-container {
-            overflow-x: auto;
-            margin-top: 16px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-        th, td {
-            padding: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        th {
-            color: var(--text-secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-        }
-        td {
-            font-size: 0.95rem;
         }
         .status-badge {
             display: inline-flex;
@@ -170,67 +87,12 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-        .form-input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 12px;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.3s;
-        }
         .form-input:focus {
-            background: rgba(255, 255, 255, 0.05);
             border-color: rgba(59, 130, 246, 0.5);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
         .btn-submit {
-            display: block;
-            width: 100%;
             background: var(--accent-glow);
-            border: none;
-            border-radius: 12px;
-            padding: 12px;
-            color: white;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-submit:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3);
-        }
-        .alert {
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .alert-error {
-            background-color: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #f87171;
-        }
-        .alert-success {
-            background-color: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            color: #34d399;
         }
     </style>
 </head>
