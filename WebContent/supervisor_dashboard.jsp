@@ -209,10 +209,16 @@
 </head>
 <body>
     <div class="navbar">
-        <h2>Parcel Delivery Terminal</h2>
-        <div class="nav-info">
-            <span>Logged in as: <strong><%= username %></strong> (<%= role %>)</span>
-            <a href="AuthServlet?action=logout" class="btn-logout">Logout</a>
+        <h2>Shopee Delivery Logistics</h2>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="index.jsp" class="active">Dashboard</a>
+                <a href="driver.jsp">Drivers</a>
+                <a href="vehicle.jsp">Vehicles</a>
+                <a href="orders.jsp">Orders</a>
+            </div>
+            <span class="role-tag supervisor"><%= role %></span>
+            <a href="<%= request.getContextPath() %>/logout" class="btn-logout">Sign Out</a>
         </div>
     </div>
 

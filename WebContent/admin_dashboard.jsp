@@ -98,10 +98,13 @@
 </head>
 <body>
     <div class="navbar">
-        <h2>Parcel Delivery Administration</h2>
-        <div class="nav-info">
-            <span>Welcome, <strong><%= username %></strong> (Admin)</span>
-            <a href="AuthServlet?action=logout" class="btn-logout">Logout</a>
+        <h2>Shopee Delivery Logistics</h2>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="index.jsp" class="active">Dashboard</a>
+            </div>
+            <span class="role-tag admin">ADMIN</span>
+            <a href="<%= request.getContextPath() %>/logout" class="btn-logout">Sign Out</a>
         </div>
     </div>
 

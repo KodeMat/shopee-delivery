@@ -37,15 +37,60 @@
             left: -100px;
             z-index: 0;
         }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .role-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .role-tag.admin {
+            background: rgba(239, 68, 68, 0.1);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .role-tag.supervisor {
+            background: rgba(59, 130, 246, 0.1);
+            color: #93c5fd;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .btn-logout {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.15s ease;
+        }
+        .btn-logout:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+        }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <h2>Driver Management</h2>
-        <div class="nav-links">
-            <a href="index.jsp">Dashboard</a>
-            <a href="driver.jsp" class="active">Drivers</a>
-            <a href="logout">Logout</a>
+        <h2>Shopee Delivery Logistics</h2>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="index.jsp">Dashboard</a>
+                <a href="driver.jsp" class="active">Drivers</a>
+                <a href="vehicle.jsp">Vehicles</a>
+                <a href="orders.jsp">Orders</a>
+            </div>
+            <span class="role-tag supervisor"><%= role %></span>
+            <a href="<%= request.getContextPath() %>/logout" class="btn-logout">Sign Out</a>
         </div>
     </div>
 
