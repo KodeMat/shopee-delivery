@@ -144,7 +144,8 @@
                                                 <span style="color: var(--text-secondary); font-size: 0.85rem; font-style: italic;">Unassigned</span>
                                             <% } %>
                                         </td>
-                                                                                    <!-- Change status form (Denise's SetOrderStatusServlet) -->
+                                        <td>
+                                            <!-- Change status form (Denise's SetOrderStatusServlet) -->
                                             <form action="set-status" method="post" class="status-container">
                                                 <input type="hidden" name="orderId" value="<%= orderNum %>">
                                                 <select name="status" class="small-select">

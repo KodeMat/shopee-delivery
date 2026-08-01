@@ -56,6 +56,7 @@ public class UserDAO {
                 + "order_number VARCHAR(50) NOT NULL UNIQUE, "
                 + "recipient_name VARCHAR(100) NOT NULL, "
                 + "recipient_address TEXT NOT NULL, "
+                + "contact_phone VARCHAR(50), "
                 + "weight DOUBLE, "
                 + "status VARCHAR(20) DEFAULT 'Pending', "
                 + "driver_id INT NULL, "
@@ -70,6 +71,14 @@ public class UserDAO {
             stmt.executeUpdate(sqlDrivers);
             stmt.executeUpdate(sqlVehicles);
             stmt.executeUpdate(sqlOrders);
+            
+            // Auto-migrate: ensure contact_phone column exists if table was created previously without it
+            try {
+                stmt.executeUpdate("ALTER TABLE delivery_orders ADD COLUMN contact_phone VARCHAR(50) AFTER recipient_address");
+            } catch (SQLException ignored) {
+                // Column already exists
+            }
+            
             seedDefaultAccounts(conn);
         } catch (SQLException e) {
             e.printStackTrace();

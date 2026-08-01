@@ -292,3 +292,54 @@ body.page-dashboard::before {
     left: -100px;
     z-index: 0;
 }
+
+/* ===== Table Actions Column ===== */
+.status-container,
+.assign-container {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+.assign-container {
+    margin-bottom: 0;
+}
+
+.small-select {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    cursor: pointer;
+    min-width: 120px;
+    transition: border-color 0.2s ease;
+}
+.small-select:focus {
+    outline: none;
+    border-color: var(--text-accent);
+}
+
+.btn-inline {
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-glow);
+    color: #fff;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+}
+.btn-inline:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+.btn-inline:active {
+    transform: translateY(0);
+}

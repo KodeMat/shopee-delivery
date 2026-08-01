@@ -18,9 +18,14 @@
     pkgs.tomcat9
   ];
 
-  # 3. Enable background MySQL server with shopee_delivery database
+  # 3. Enable background MySQL server with shopee_delivery database on port 3306
   services.mysql = {
     enable = true;
+    settings = {
+      mysqld = {
+        port = 3306;
+      };
+    };
     initialDatabases = [
       {
         name = "shopee_delivery";
