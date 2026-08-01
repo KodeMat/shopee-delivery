@@ -22,96 +22,6 @@
     <title>Delivery Orders - Shopee Delivery Logistics</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/common.css?v=2">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-        body::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(249, 115, 22, 0.06) 0%, rgba(0,0,0,0) 70%);
-            top: -150px;
-            left: -100px;
-            z-index: 0;
-        }
-        .inline-form {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .inline-form select {
-            padding: 6px 10px;
-            font-size: 0.85rem;
-            border-radius: 8px;
-        }
-
-        /* ===== Modal Dialog ===== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.25s ease, visibility 0.25s ease;
-        }
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-card {
-            background: #111827;
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 32px;
-            width: 100%;
-            max-width: 440px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            transform: translateY(20px);
-            transition: transform 0.25s ease;
-        }
-        .modal-overlay.active .modal-card {
-            transform: translateY(0);
-        }
-        .modal-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-accent);
-            margin-bottom: 20px;
-        }
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-            margin-top: 24px;
-        }
-        .btn-secondary {
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: background 0.15s ease, color 0.15s ease;
-        }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-        }
-    </style>
 </head>
 <body>
     <div class="navbar">
@@ -152,11 +62,11 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Order details</th>
-                            <th>Cargo Weight</th>
-                            <th>Status</th>
-                            <th>Assigned Dispatch</th>
-                            <th>Actions</th>
+                            <th class="col-order-details">Order details</th>
+                            <th class="col-cargo-weight">Cargo Weight</th>
+                            <th class="col-status">Status</th>
+                            <th class="col-dispatch">Assigned Dispatch</th>
+                            <th class="col-actions">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -190,18 +100,18 @@
                                     String vehicleType = rs.getString("vehicle_type");
                         %>
                                     <tr>
-                                        <td>
+                                        <td class="col-order-details">
                                             <strong>#<%= orderNum %></strong><br>
                                             <span style="font-size: 0.85rem; color: var(--text-secondary);">
                                                 To: <%= recName %><br>
                                                 Addr: <%= recAddr %>
                                             </span>
                                         </td>
-                                        <td><%= weight %> kg</td>
-                                        <td>
+                                        <td class="col-cargo-weight"><%= weight %> kg</td>
+                                        <td class="col-status">
                                             <span class="badge <%= badgeClass %>"><%= stat %></span>
                                         </td>
-                                        <td>
+                                        <td class="col-dispatch">
                                             <% if (driverName != null) { %>
                                                 <div style="font-size: 0.85rem; line-height: 1.4;">
                                                     👤 <%= driverName %><br>
@@ -211,25 +121,28 @@
                                                 <span style="color: var(--text-secondary); font-size: 0.85rem; font-style: italic;">Unassigned</span>
                                             <% } %>
                                         </td>
-                                        <td>
-                                            <!-- Change status form (Denise's SetOrderStatusServlet) -->
-                                            <form action="set-status" method="post" class="status-container">
-                                                <input type="hidden" name="orderId" value="<%= orderNum %>">
-                                                <select name="status" class="small-select">
-                                                    <option value="Pending" <%= "Pending".equals(stat) ? "selected" : "" %>>Pending</option>
-                                                    <option value="Assigned" <%= "Assigned".equals(stat) ? "selected" : "" %>>Assigned</option>
-                                                    <option value="In Transit" <%= "In Transit".equals(stat) ? "selected" : "" %>>In Transit</option>
-                                                    <option value="Delivered" <%= "Delivered".equals(stat) ? "selected" : "" %>>Delivered</option>
-                                                    <option value="Cancelled" <%= "Cancelled".equals(stat) ? "selected" : "" %>>Cancelled</option>
-                                                </select>
-                                                <button type="submit" class="btn-inline">Set Status</button>
-                                            </form>
+                                        <td class="col-actions">
+                                            <div class="actions-cell-wrapper">
+                                                <form action="set-status" method="post" class="actions-form">
+                                                    <input type="hidden" name="orderId" value="<%= orderNum %>">
+                                                    <div>
+                                                        <select name="status" class="small-select small-select-fixed">
+                                                            <option value="Pending" <%= "Pending".equals(stat) ? "selected" : "" %>>Pending</option>
+                                                            <option value="Assigned" <%= "Assigned".equals(stat) ? "selected" : "" %>>Assigned</option>
+                                                            <option value="In Transit" <%= "In Transit".equals(stat) ? "selected" : "" %>>In Transit</option>
+                                                            <option value="Delivered" <%= "Delivered".equals(stat) ? "selected" : "" %>>Delivered</option>
+                                                            <option value="Cancelled" <%= "Cancelled".equals(stat) ? "selected" : "" %>>Cancelled</option>
+                                                        </select>
+                                                    </div>
 
-                                            <!-- Fleet Assignment Trigger Button (Opens Modal Popup) -->
-                                            <div style="margin-top: 8px;">
-                                                <button type="button" class="btn-inline" style="background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.3); color: #fb923c;" onclick="openAssignModal(<%= orderId %>, '#<%= orderNum %>')">
-                                                    🚚 Assign Fleet
-                                                </button>
+                                                    <div class="actions-btn-group">
+                                                        <button type="submit" class="btn-inline">Set Status</button>
+                                                        <!-- Fleet Assignment Trigger Button (Opens Modal Popup) -->
+                                                        <button type="button" class="btn-inline btn-assign-fleet" onclick="openAssignModal(<%= orderId %>, '#<%= orderNum %>')">
+                                                            🚚 Assign Fleet
+                                                        </button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>

@@ -22,22 +22,6 @@
     <title>Vehicle Management - Shopee Delivery Logistics</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/common.css?v=2">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-        body::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(249, 115, 22, 0.06) 0%, rgba(0,0,0,0) 70%);
-            top: -150px;
-            left: -100px;
-            z-index: 0;
-        }
-    </style>
 </head>
 <body>
     <div class="navbar">
