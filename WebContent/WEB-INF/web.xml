@@ -9,4 +9,95 @@
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+
+    <!-- Servlet Declarations -->
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>edu.iacademy.cselec05.pm_rima.HelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>edu.iacademy.cselec05.pm_rima.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>edu.iacademy.cselec05.pm_rima.servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>edu.iacademy.cselec05.pm_rima.servlet.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddDeliveryOrderServlet</servlet-name>
+        <servlet-class>edu.iacademy.cselec05.pm_rima.servlet.AddDeliveryOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddDeliveryOrderServlet</servlet-name>
+        <url-pattern>/add-order</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DriverServlet</servlet-name>
+        <servlet-class>edu.iacademy.cselec05.pm_rima.servlet.DriverServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DriverServlet</servlet-name>
+        <url-pattern>/DriverServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditUserServlet</servlet-name>
+        <servlet-class>edu.iacademy.cselec05.pm_rima.servlet.EditUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditUserServlet</servlet-name>
+        <url-pattern>/edit-user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>edu.iacademy.cselec05.pm_rima.servlet.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/OrderServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SetOrderStatusServlet</servlet-name>
+        <servlet-class>edu.iacademy.cselec05.pm_rima.servlet.SetOrderStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetOrderStatusServlet</servlet-name>
+        <url-pattern>/set-status</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>VehicleServlet</servlet-name>
+        <servlet-class>edu.iacademy.cselec05.pm_rima.servlet.VehicleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VehicleServlet</servlet-name>
+        <url-pattern>/VehicleServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

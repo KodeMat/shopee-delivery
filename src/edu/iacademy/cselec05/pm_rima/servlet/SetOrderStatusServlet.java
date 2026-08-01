@@ -4,7 +4,6 @@ import edu.iacademy.cselec05.pm_rima.model.DeliveryOrder;
 import edu.iacademy.cselec05.pm_rima.util.DatabaseConfig;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-@WebServlet("/set-status")
 public class SetOrderStatusServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

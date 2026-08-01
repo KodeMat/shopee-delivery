@@ -4,7 +4,6 @@ import edu.iacademy.cselec05.pm_rima.model.DeliveryOrder;
 import edu.iacademy.cselec05.pm_rima.util.DatabaseConfig;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@WebServlet("/add-order")
 public class AddDeliveryOrderServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

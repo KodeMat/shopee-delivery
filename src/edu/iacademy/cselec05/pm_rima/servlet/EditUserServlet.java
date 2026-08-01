@@ -4,14 +4,12 @@ import edu.iacademy.cselec05.pm_rima.dao.UserDAO;
 import edu.iacademy.cselec05.pm_rima.model.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(name = "EditUserServlet", urlPatterns = {"/edit-user"})
 public class EditUserServlet extends HttpServlet {
 
     private boolean checkAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException {
